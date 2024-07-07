@@ -3,7 +3,9 @@ import "./index.scss";
 import Model from "../model";
 import CreateBook from "../create-book";
 
-const BooksHero: React.FC = () => {
+const BooksHero: React.FC<{ booksCount: number | undefined }> = ({
+  booksCount,
+}) => {
   const [show, setShow] = useState<boolean>(false);
   const closeFunction: () => void = () => {
     setShow(false);
@@ -13,7 +15,7 @@ const BooksHero: React.FC = () => {
       <div className="books-hero">
         <div className="hero__text">
           <h1>
-            You’ve got <span>7 book</span>{" "}
+            You’ve got <span>{booksCount} book</span>{" "}
           </h1>
           <p>Your books today</p>
         </div>

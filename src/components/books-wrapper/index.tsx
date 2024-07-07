@@ -5,8 +5,10 @@ import "./index.scss";
 import BooksSkeleton from "../books-skeleton";
 import { useSelector } from "react-redux";
 import { RootState } from "../../context/store";
-const BooksWrapper: React.FC = () => {
-  const { data, isLoading } = apiSlice.useGetBooksQuery();
+const BooksWrapper: React.FC<{
+  setBooksCount: React.Dispatch<React.SetStateAction<number>>;
+}> = ({ setBooksCount }) => {
+  const { data, isLoading, isFetching } = apiSlice.useGetBooksQuery();
   const value = useSelector((s: RootState) => s.search.value);
 
   const [filterBooks, setFilterBooks] = useState<
@@ -19,7 +21,8 @@ const BooksWrapper: React.FC = () => {
         book.title.toLowerCase().includes(value?.trim()?.toLowerCase())
       )
     );
-  }, [value]);
+    setBooksCount(value?.trim() ? filterBooks?.length : data?.length);
+  }, [value, isFetching]);
 
   const books: JSX.Element[] | undefined = (
     value?.trim().length ? filterBooks : data
