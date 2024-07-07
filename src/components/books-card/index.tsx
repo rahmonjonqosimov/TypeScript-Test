@@ -14,7 +14,9 @@ interface BookDataSchema {
 }
 import { toast } from "react-toastify";
 import Loading from "../loading";
-const BooksCard: React.FC<{ data: null | BookDataSchema }> = ({ data }) => {
+const BooksCard: React.FC<{ data: null | BookDataSchema | undefined }> = ({
+  data,
+}) => {
   const [updateBook, setUpdateBook] = useState<null | BookDataSchema>(null);
   const [deleteBook, { isSuccess, isLoading }] = useDeleteBookMutation();
 
@@ -67,7 +69,7 @@ const BooksCard: React.FC<{ data: null | BookDataSchema }> = ({ data }) => {
       </div>
       {updateBook ? (
         <Model closeFunction={closeFunction}>
-          <UpdateBook data={updateBook} updateFunction={setUpdateBook} />
+          <Update Book data={updateBook} updateFunction={setUpdateBook} />
         </Model>
       ) : (
         <></>
