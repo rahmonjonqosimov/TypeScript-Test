@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import counterReducer from "./slices/CounterState";
 import { apiSlice } from "./api/api";
+import searchValue from "./slices/SearchState";
 
 export const store = configureStore({
   reducer: {
     // bu yerda sizning reduksiyalaringiz joylashadi
-    counter: counterReducer,
+    search: searchValue,
     [apiSlice.reducerPath]: apiSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>

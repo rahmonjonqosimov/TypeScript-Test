@@ -1,0 +1,84 @@
+.create-book {
+  padding: 24px 28px;
+  background: #fff;
+  border-radius: 12px;
+  width: 430px;
+  position: relative;
+  h2 {
+    font-family: Mulish;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 25.1px;
+    text-align: left;
+    color: #151515;
+    margin-bottom: 28px;
+  }
+  label {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16.8px;
+    color: #151515;
+    margin-bottom: 4px;
+  }
+  .isbn__input {
+    width: 100%;
+    display: flex;
+    height: 47px;
+    border: 1px solid #ebebeb;
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+    input {
+      width: 100%;
+      padding: 0 20px 0 48px;
+      outline: none;
+      border: none;
+
+      ::placeholder {
+        font-size: 16px;
+        color: #ebebeb;
+      }
+    }
+    .link {
+      position: absolute;
+      left: 17px;
+      top: 50%;
+      transform: translate(0, -50%);
+    }
+  }
+  .btns {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 28px;
+    button {
+      padding: 10px 0px;
+      border-radius: 4px;
+      width: 177px;
+      border: none;
+      background: #6200ee;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 20.08px;
+      cursor: pointer;
+      &:hover {
+        background: #5000c1;
+      }
+    }
+    .close {
+      border: 1px solid #6200ee;
+      background: #fff;
+      color: #6200ee;
+      &:hover {
+        background: #f4f4f4;
+      }
+    }
+  }
+  .close-icon {
+    position: absolute;
+    top: 25px;
+    right: 30px;
+    cursor: pointer;
+  }
+}

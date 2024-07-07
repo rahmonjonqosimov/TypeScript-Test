@@ -38,12 +38,12 @@ const BooksCard: React.FC<CardProps> = ({ data }) => {
     <>
       {isLoading ? <Loading /> : <></>}
       <div className="book__card">
-        <h4>{data?.title}</h4>
+        <h4 title={data?.title}>{data?.title}</h4>
         <ul>
-          <li>Cover: {data?.cover}</li>
-          <li>Pages: {data?.pages}</li>
-          <li>Published: {data?.published}</li>
-          <li>Isbn: {data?.isbn}</li>
+          <li title={data?.cover}>Categories: {data?.cover}</li>
+          <li title={data?.pages}>Pages: {data?.pages}</li>
+          <li title={data?.published}>Published: {data?.published}</li>
+          <li title={data?.isbn}>Isbn: {data?.isbn}</li>
         </ul>
         <div className="card__row">
           <p>Eben Upton / 2012</p>

@@ -4,6 +4,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 36px;
+  padding-bottom: 60px;
   .book__card {
     width: 100%;
     background: #fff;
@@ -16,6 +17,11 @@
       font-weight: 600;
       line-height: 19.5px;
       color: #151515;
+      max-width: 300px;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
     ul {
       list-style: none;
@@ -25,6 +31,11 @@
         font-weight: 400;
         line-height: 21px;
         color: #333333;
+        max-width: 300px;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
       }
     }
     .card__row {
@@ -34,8 +45,14 @@
       p {
         font-size: 14px;
         font-weight: 500;
+        max-width: 300px;
+        overflow: hidden;
         line-height: 15px;
         color: #333333;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
       }
       span {
         padding: 2px 12px;

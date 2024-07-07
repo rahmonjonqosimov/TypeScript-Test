@@ -50,8 +50,16 @@ export const apiSlice = createApi({
     updateBook: builder.mutation<BookDataSchema, Partial<BookDataSchema>>({
       query: (updatedPost) => ({
         url: `books/${updatedPost.id}`,
-        method: "PUT", // Yoki 'PATCH' ham bo'lishi mumkin
+        method: "PUT",
         body: updatedPost,
+      }),
+      invalidatesTags: ["Books"],
+    }),
+    createBook: builder.mutation<BookDataSchema, Partial<BookDataSchema>>({
+      query: (newPost) => ({
+        url: "books",
+        method: "POST",
+        body: newPost,
       }),
       invalidatesTags: ["Books"],
     }),
@@ -64,4 +72,5 @@ export const {
   useGetBooksQuery,
   useDeleteBookMutation,
   useUpdateBookMutation,
+  useCreateBookMutation,
 } = apiSlice;

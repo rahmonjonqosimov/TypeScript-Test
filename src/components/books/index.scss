@@ -3,6 +3,7 @@
   align-items: center;
   gap: 24px;
   padding: 12px 16px;
+
   .logo {
     display: flex;
     align-items: center;
@@ -20,17 +21,13 @@
     }
   }
   .serach {
-    height: 48px;
-    width: 300px;
-    display: flex;
-    // position: relative;
-    border-radius: 6px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 0 20px 0 36px;
+    position: relative;
     input {
+      overflow: hidden;
+      border-radius: 6px;
+      height: 48px;
+      width: 350px;
+      padding: 0 20px 0 36px;
       flex: 1;
       border: none;
       outline: none;
@@ -43,13 +40,22 @@
       ::placeholder {
         color: #b5b5b5;
       }
-    }
-    input:focus + svg {
-      color: #000; // svg rangini qora qilish
+      &:focus ~ svg {
+        color: #151515;
+      }
     }
     svg {
-      color: #fff;
-      font-size: 22px;
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translate(0, -50%);
+      font-size: 20px;
+      color: #6200ee;
+    }
+
+    input:focus {
+      background-color: #fefefe;
+      color: #151515;
     }
   }
   .notification {
