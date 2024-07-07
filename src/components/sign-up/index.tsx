@@ -40,7 +40,7 @@ const SignUpComponent: React.FC = () => {
     if (isSuccess) {
       toast.success(`Successfully registered !`);
       localStorage.setItem("x-auth-token", "qwertyuiopasdfhjklzxcvbnm");
-      navigate("/books");
+      navigate("/");
     }
   }, [isSuccess]);
 

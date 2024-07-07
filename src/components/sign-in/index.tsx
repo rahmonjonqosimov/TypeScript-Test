@@ -37,7 +37,7 @@ const SignInComponent: React.FC = () => {
       if (isLogin?.length) {
         localStorage.setItem("x-auth-token", "qwertyuiopasdfghjklzxcvbnm");
         toast.success("Welcome");
-        navigate("/books");
+        navigate("/");
       } else {
         return toast.error("Username and password are incorrect!");
       }

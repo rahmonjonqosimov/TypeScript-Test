@@ -6,14 +6,17 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SignUpPage from "./pages/sign-up";
 import BooksPage from "./pages/books";
+import Auth from "./pages/auth";
 
 const App: React.FC = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<SignInPage />} />
+        <Route path="/login" element={<SignInPage />} />
         <Route path="/sign-up" element={<SignUpPage />} />
-        <Route path="/books" element={<BooksPage />} />
+        <Route path="/" element={<Auth />}>
+          <Route path="/" element={<BooksPage />} />
+        </Route>
       </Routes>
       <ToastContainer />
     </>
