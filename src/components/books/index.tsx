@@ -5,7 +5,7 @@ import BooksHero from "../books-hero";
 import BooksWrapper from "../books-wrapper";
 
 const BooksComponent: React.FC = () => {
-  const [booksCount, setBooksCount] = useState<number | undefined>(0);
+  const [booksCount, setBooksCount] = useState<number>(0);
   return (
     <>
       <BooksNavbar />

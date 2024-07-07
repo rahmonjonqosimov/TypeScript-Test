@@ -9,7 +9,7 @@ import { RootState } from "../../context/store";
 const BooksWrapper: React.FC<{
   setBooksCount: React.Dispatch<React.SetStateAction<number>>;
 }> = ({ setBooksCount }) => {
-  const { data, isLoading, isFetching } = apiSlice.useGetBooksQuery();
+  const { data, isLoading } = apiSlice.useGetBooksQuery();
   const value = useSelector((s: RootState) => s.search.value);
 
   const [filterBooks, setFilterBooks] = useState<BookDataSchema[]>([]);
@@ -22,7 +22,7 @@ const BooksWrapper: React.FC<{
       setFilterBooks(filtered);
       setBooksCount(filtered.length);
     } else {
-      setBooksCount(0); // Yoki data yo'q bo'lganda boshqa mos qiymat
+      setBooksCount(0);
     }
   }, [value, data, setBooksCount]);
 
