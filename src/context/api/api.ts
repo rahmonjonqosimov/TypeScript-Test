@@ -38,20 +38,14 @@ export const apiSlice = createApi({
     // books
     getBooks: builder.query<BookDataSchema[], void>({
       query: () => "books",
-      providesTags: (result) =>
-        result
-          ? [
-              ...result.map(({ id }) => ({ type: "Books" as const, id })),
-              { type: "Books", id: "LIST" },
-            ]
-          : [{ type: "Books", id: "LIST" }],
+      providesTags: ["Books"],
     }),
     deleteBook: builder.mutation<{ success: boolean; id: string }, number>({
       query: (postId) => ({
         url: `books/${postId}`,
         method: "DELETE",
       }),
-      invalidatesTags: (result, error, id) => [{ type: "Books", id }],
+      invalidatesTags: ["Books"],
     }),
     updateBook: builder.mutation<BookDataSchema, Partial<BookDataSchema>>({
       query: (updatedPost) => ({
@@ -59,7 +53,7 @@ export const apiSlice = createApi({
         method: "PUT", // Yoki 'PATCH' ham bo'lishi mumkin
         body: updatedPost,
       }),
-      invalidatesTags: (result, error, { id }) => [{ type: "Books", id }],
+      invalidatesTags: ["Books"],
     }),
   }),
 });
