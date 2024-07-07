@@ -72,7 +72,9 @@ const CreateBook: React.FC<CreateBookProps> = ({ setShow }) => {
         <button type="button" className="close" onClick={() => setShow(false)}>
           Close
         </button>
-        <button>{isLoading ? "Loading..." : "Submit"}</button>
+        <button disabled={isLoading}>
+          {isLoading ? "Loading..." : "Submit"}
+        </button>
       </div>
     </form>
   );
