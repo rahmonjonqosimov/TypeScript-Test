@@ -5,28 +5,31 @@ import "./index.scss";
 import BooksSkeleton from "../books-skeleton";
 import { useSelector } from "react-redux";
 import { RootState } from "../../context/store";
+
 const BooksWrapper: React.FC<{
   setBooksCount: React.Dispatch<React.SetStateAction<number>>;
 }> = ({ setBooksCount }) => {
-  const { data, isLoading, isFetching } = apiSlice.useGetBooksQuery();
+  const { data, isLoading } = apiSlice.useGetBooksQuery();
   const value = useSelector((s: RootState) => s.search.value);
 
-  const [filterBooks, setFilterBooks] = useState<
-    BookDataSchema[] | undefined
-  >();
+  const [filterBooks, setFilterBooks] = useState<BookDataSchema[] | undefined>(
+    data
+  );
 
   useEffect(() => {
-    setFilterBooks(
-      data?.filter((book) =>
+    if (data) {
+      const filtered = data.filter((book) =>
         book.title.toLowerCase().includes(value?.trim()?.toLowerCase())
-      )
-    );
-    setBooksCount(value?.trim() ? filterBooks? filterBooks.length : data ? data?.length);
-  }, [value, isFetching]);
+      );
+      setFilterBooks(filtered);
+      setBooksCount(value?.trim() ? filtered.length : data.length);
+    }
+  }, [value, data, setBooksCount]);
 
-  const books: JSX.Element[] | undefined = (
-    value?.trim().length ? filterBooks : data
-  )?.map((book: BookDataSchema) => <BooksCard data={book} key={book.id} />);
+  const books: JSX.Element[] | undefined = filterBooks?.map(
+    (book: BookDataSchema) => <BooksCard data={book} key={book.id} />
+  );
+
   return (
     <>
       {isLoading ? <BooksSkeleton /> : <></>}
