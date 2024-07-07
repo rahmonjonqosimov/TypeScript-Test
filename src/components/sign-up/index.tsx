@@ -11,17 +11,12 @@ import {
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-
-interface UserSchema {
-  username: string;
-  password: string;
-}
-
-import { useRegisterUserMutation } from "../../services/userApi";
+import { apiSlice } from "../../context/api/api";
 
 const SignUpComponent: React.FC = () => {
   const navigate = useNavigate();
-  const [registerUser, { isSuccess, isLoading }] = useRegisterUserMutation();
+  const [registerUser, { isLoading, isSuccess }] =
+    apiSlice.useRegisterUserMutation();
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -32,11 +27,7 @@ const SignUpComponent: React.FC = () => {
 
     if (password?.trim() && username?.trim() && confirmPassword?.trim()) {
       if (password == confirmPassword) {
-        const user: UserSchema = {
-          username: username,
-          password: password,
-        };
-        registerUser(user);
+        registerUser({ username: username, password: password });
       } else {
         return toast.warning("Passwords did not match!");
       }

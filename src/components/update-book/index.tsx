@@ -1,33 +1,40 @@
-import React, { useEffect, ChangeEvent } from "react";
-import "./index.scss";
-import { useUpdateBookMutation } from "../../services/booksApi";
+import React, { useEffect, ChangeEvent, FormEvent } from "react";
 import { toast } from "react-toastify";
+import { BookDataSchema } from "../../context/api/api";
+import { apiSlice } from "../../context/api/api";
+import "./index.scss";
 
-interface BookDataSchema {
-  author: string;
-  cover: string;
-  id: string;
-  isbn: string;
-  pages: string;
-  published: string;
-  title: string;
-}
 interface UpdateBookProps {
   data: BookDataSchema;
   updateFunction: React.Dispatch<React.SetStateAction<BookDataSchema | null>>;
 }
 
 const UpdateBook: React.FC<UpdateBookProps> = ({ data, updateFunction }) => {
-  const [updataBook, { isLoading, isSuccess }] = useUpdateBookMutation();
-  console.log(data);
-  const handleUpdateBook: (e: ChangeEvent<HTMLInputElement>) => void = (e) => {
+  const [updateBook, { isLoading, isSuccess }] =
+    apiSlice.useUpdateBookMutation();
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    let { value, name } = e.target;
+    updateFunction((p: any) => ({ ...p, [name]: value }));
+  };
+
+  const handleUpdateBook = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    updataBook({ body: data, id: data.id });
+    // const updateData: BookDataSchema = {
+    //   author: data.author,
+    //   cover: data.cover,
+    //   isbn: data.isbn,
+    //   pages: data.pages,
+    //   published: data.published,
+    //   title: data.title,
+    // };
+    updateBook(data);
+    // console.log(updateData);
   };
 
   useEffect(() => {
     if (isSuccess) {
-      toast.success("Updated book successfully");
+      toast.success("Updated Successfully!");
       updateFunction(null);
     }
   }, [isSuccess]);
@@ -39,60 +46,40 @@ const UpdateBook: React.FC<UpdateBookProps> = ({ data, updateFunction }) => {
         id="title"
         type="text"
         value={data.title}
-        onChange={(e) =>
-          updateFunction((prev: BookDataSchema) => ({
-            ...prev,
-            title: e.target.value,
-          }))
-        }
+        onChange={handleChange}
+        name="title"
       />
       <label htmlFor="author">Author</label>
       <input
         id="author"
         type="text"
         value={data.author}
-        onChange={(e) =>
-          updateFunction((prev: BookDataSchema) => ({
-            ...prev,
-            author: e.target.value,
-          }))
-        }
+        onChange={handleChange}
+        name="author"
       />
       <label htmlFor="cover">Cover</label>
       <input
         id="cover"
         type="text"
         value={data.cover}
-        onChange={(e) =>
-          updateFunction((prev: BookDataSchema) => ({
-            ...prev,
-            cover: e.target.value,
-          }))
-        }
+        onChange={handleChange}
+        name="cover"
       />
       <label htmlFor="published">Published</label>
       <input
         id="published"
         type="text"
         value={data.published}
-        onChange={(e) =>
-          updateFunction((prev: BookDataSchema) => ({
-            ...prev,
-            published: e.target.value,
-          }))
-        }
+        onChange={handleChange}
+        name="published"
       />
       <label htmlFor="pages">Pages</label>
       <input
         id="pages"
         type="text"
         value={data.pages}
-        onChange={(e) =>
-          updateFunction((prev: BookDataSchema) => ({
-            ...prev,
-            pages: e.target.value,
-          }))
-        }
+        onChange={handleChange}
+        name="pages"
       />
       <div className="btns">
         <button type="button" onClick={() => updateFunction(null)}>

@@ -9,17 +9,15 @@ import {
   Typography,
 } from "@mui/material";
 import "./index.scss";
-import { useGetUsersQuery } from "../../services/userApi";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-
-interface SignInSchema {
-  username: string;
-  password: string;
-}
+import { apiSlice } from "../../context/api/api";
+import { UserSchema } from "../../context/api/api";
 
 const SignInComponent: React.FC = () => {
-  const { data: users, isLoading } = useGetUsersQuery({ url: "/users" });
+  const { data: users } = apiSlice.useGetUsersQuery();
+  console.log(users);
+
   const navigate = useNavigate();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -31,13 +29,12 @@ const SignInComponent: React.FC = () => {
     let password = formData.get("password") as string | null;
 
     if (username?.trim() && password?.trim()) {
-      const isLogin =
-        users?.filter(
-          (user: SignInSchema) =>
-            user.username === username && user.password === password
-        ) || [];
+      const isLogin: UserSchema[] | undefined = users?.filter(
+        (user: UserSchema) =>
+          user.username === username && user.password === password
+      );
 
-      if (isLogin.length) {
+      if (isLogin?.length) {
         localStorage.setItem("x-auth-token", "qwertyuiopasdfghjklzxcvbnm");
         toast.success("Welcome");
         navigate("/books");
@@ -100,7 +97,7 @@ const SignInComponent: React.FC = () => {
               variant="contained"
               sx={{ mt: 3, mb: 2, p: "10px", background: "#6200EE" }}
             >
-              {isLoading ? "Loading..." : " Sign In"}
+              Sign In
             </Button>
           </Box>
           <span>

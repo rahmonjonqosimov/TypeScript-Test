@@ -3,12 +3,8 @@ import BooksNavbar from "../books-navbar";
 import "./index.scss";
 import BooksHero from "../books-hero";
 import BooksWrapper from "../books-wrapper";
-import { useGetBooksQuery } from "../../services/booksApi";
 
-const BooksComponent = () => {
-  const { data } = useGetBooksQuery("/books");
-  console.log(data);
-
+const BooksComponent: React.FC = () => {
   return (
     <>
       <BooksNavbar />

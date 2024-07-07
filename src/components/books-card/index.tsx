@@ -1,43 +1,38 @@
-import React, { useEffect, useState, MouseEvent } from "react";
+import React, { useEffect, useState } from "react";
 import { deleteIcon, update } from "../../assets/images";
 import Model from "../model";
 import UpdateBook from "../update-book";
-import { useDeleteBookMutation } from "../../services/booksApi";
-interface BookDataSchema {
-  author: string;
-  cover: string;
-  id: string;
-  isbn: string;
-  pages: string;
-  published: string;
-  title: string;
-}
-import { toast } from "react-toastify";
+
+// import { toast } from "react-toastify";
 import Loading from "../loading";
-const BooksCard: React.FC<{ data: null | BookDataSchema | undefined }> = ({
-  data,
-}) => {
-  const [updateBook, setUpdateBook] = useState<null | BookDataSchema>(null);
-  const [deleteBook, { isSuccess, isLoading }] = useDeleteBookMutation();
+import { apiSlice } from "../../context/api/api";
 
-  const closeFunction = () => {
-    setUpdateBook(null);
-  };
+interface CardProps {
+  data: null | BookDataSchema | undefined;
+}
 
-  const handleDeleteBookById: (id: string) => void = (id: string) => {
-    console.log(id);
+import { BookDataSchema } from "../../context/api/api";
+import { toast } from "react-toastify";
+const BooksCard: React.FC<CardProps> = ({ data }) => {
+  // --------  DELETE   --------------
+  const [deleteBookById, { isSuccess, isLoading }] =
+    apiSlice.useDeleteBookMutation();
+  const handleDeleteBookById = (id: any) => {
     if (window.confirm("Are you sure you want to delete")) {
-      deleteBook(id);
+      deleteBookById(id);
     }
   };
-
   useEffect(() => {
     if (isSuccess) {
-      toast.success("Book deleted successfully!");
+      toast.success("Deleted Book successfully !");
     }
   }, [isSuccess]);
 
-  const id: string | undefined = data?.id;
+  // --------  UPDATE   --------------
+  const [updateBook, setUpdateBook] = useState<any>(null);
+  const closeFunction: () => void = () => {
+    setUpdateBook(null);
+  };
 
   return (
     <>
@@ -56,19 +51,22 @@ const BooksCard: React.FC<{ data: null | BookDataSchema | undefined }> = ({
         </div>
         <div className="btn__wrapper">
           <button
-            onClick={() => handleDeleteBookById(id)}
+            onClick={() => handleDeleteBookById(data?.id)}
             style={{ background: "#FF4D4F" }}
           >
             <img src={deleteIcon} alt="delete-icon" />
           </button>
-          <button style={{ background: "#6200EE" }}>
+          <button
+            onClick={() => setUpdateBook(data)}
+            style={{ background: "#6200EE" }}
+          >
             <img src={update} alt="update-icon" />
           </button>
         </div>
       </div>
       {updateBook ? (
         <Model closeFunction={closeFunction}>
-          <Update Book data={updateBook} updateFunction={setUpdateBook} />
+          <UpdateBook data={updateBook} updateFunction={setUpdateBook} />
         </Model>
       ) : (
         <></>
