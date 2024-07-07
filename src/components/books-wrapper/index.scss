@@ -1,0 +1,79 @@
+.books__wrapper {
+  padding: 0 50px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 36px;
+  .book__card {
+    width: 100%;
+    background: #fff;
+    padding: 32px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 24px 0px #33333314;
+    position: relative;
+    h4 {
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 19.5px;
+      color: #151515;
+    }
+    ul {
+      list-style: none;
+      margin: 6px 0 16px;
+      li {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 21px;
+        color: #333333;
+      }
+    }
+    .card__row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      p {
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 15px;
+        color: #333333;
+      }
+      span {
+        padding: 2px 12px;
+        border-radius: 6px;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 20.08px;
+        color: #fff;
+      }
+    }
+    .btn__wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      position: absolute;
+      top: 16px;
+      left: 100%;
+      transform-origin: left;
+      transition: 0.2s;
+      transform: scaleX(0);
+      button {
+        padding: 8px;
+        border-radius: 6px;
+        border: none;
+        display: inline-block;
+        cursor: pointer;
+      }
+      button:nth-child(1) {
+        border-radius: 6px 6px 6px 0;
+      }
+      button:nth-child(2) {
+        border-radius: 0px 6px 6px 6px;
+      }
+    }
+    &:hover {
+      .btn__wrapper {
+        transform: scaleX(1);
+      }
+    }
+  }
+}

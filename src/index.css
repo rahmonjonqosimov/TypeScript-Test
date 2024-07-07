@@ -1,0 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+@font-face {
+  font-family: Mulish;
+  src: url("./fonts/Mulish-Regular.ttf");
+}
+body {
+  background: url("./assets/images/imgs/bg.png");
+  background-size: 70% 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  font-family: Mulish;
+}
