@@ -22,7 +22,10 @@ const BooksCard: React.FC<{ data: null | BookDataSchema }> = ({ data }) => {
     setUpdateBook(null);
   };
 
-  const handleDeleteBookById: (id: string) => void = (id: string) => {
+  const handleDeleteBookById: (
+    id: string,
+    e: MouseEvent<HTMLButtonElement>
+  ) => void = (id: string, e: MouseEvent<HTMLButtonElement>) => {
     console.log(id);
     if (window.confirm("Are you sure you want to delete")) {
       deleteBook(id);
