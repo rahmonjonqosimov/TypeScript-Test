@@ -9,12 +9,10 @@ import { RootState } from "../../context/store";
 const BooksWrapper: React.FC<{
   setBooksCount: React.Dispatch<React.SetStateAction<number>>;
 }> = ({ setBooksCount }) => {
-  const { data, isLoading } = apiSlice.useGetBooksQuery();
+  const { data, isLoading, isFetching } = apiSlice.useGetBooksQuery();
   const value = useSelector((s: RootState) => s.search.value);
 
-  const [filterBooks, setFilterBooks] = useState<BookDataSchema[] | undefined>(
-    data
-  );
+  const [filterBooks, setFilterBooks] = useState<BookDataSchema[]>([]);
 
   useEffect(() => {
     if (data) {
@@ -22,11 +20,13 @@ const BooksWrapper: React.FC<{
         book.title.toLowerCase().includes(value?.trim()?.toLowerCase())
       );
       setFilterBooks(filtered);
-      setBooksCount(value?.trim() ? filtered.length : data.length);
+      setBooksCount(filtered.length);
+    } else {
+      setBooksCount(0); // Yoki data yo'q bo'lganda boshqa mos qiymat
     }
   }, [value, data, setBooksCount]);
 
-  const books: JSX.Element[] | undefined = filterBooks?.map(
+  const books: JSX.Element[] | undefined = filterBooks.map(
     (book: BookDataSchema) => <BooksCard data={book} key={book.id} />
   );
 
