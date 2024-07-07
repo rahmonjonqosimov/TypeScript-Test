@@ -21,7 +21,7 @@ const BooksWrapper: React.FC<{
         book.title.toLowerCase().includes(value?.trim()?.toLowerCase())
       )
     );
-    setBooksCount(value?.trim() ? filterBooks?.length : data?.length);
+    setBooksCount(value?.trim() ? filterBooks? filterBooks.length : data ? data?.length);
   }, [value, isFetching]);
 
   const books: JSX.Element[] | undefined = (
