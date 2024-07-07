@@ -1,11 +1,11 @@
 import React from "react";
-import { logo, search, user } from "../../assets/images";
+import { logo, user } from "../../assets/images";
 import { BiSearchAlt } from "react-icons/bi";
 import { IoMdNotificationsOutline } from "react-icons/io";
 
 import { Link } from "react-router-dom";
 
-const BooksNavbar = () => {
+const BooksNavbar: React.FC = () => {
   return (
     <div className="navbar">
       <Link to={"/books"} className="logo">

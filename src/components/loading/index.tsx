@@ -1,7 +1,7 @@
 import React from "react";
 import "./index.scss";
 
-const Loading = () => {
+const Loading: React.FC = () => {
   return (
     <div className="loadingPro">
       <div className="loadingP-item">

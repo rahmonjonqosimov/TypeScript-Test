@@ -24,10 +24,7 @@ const BooksCard: React.FC<{ data: null | BookDataSchema | undefined }> = ({
     setUpdateBook(null);
   };
 
-  const handleDeleteBookById: (
-    id: string,
-    e: MouseEvent<HTMLButtonElement>
-  ) => void = (id: string, e: MouseEvent<HTMLButtonElement>) => {
+  const handleDeleteBookById: (id: string) => void = (id: string) => {
     console.log(id);
     if (window.confirm("Are you sure you want to delete")) {
       deleteBook(id);
@@ -39,6 +36,8 @@ const BooksCard: React.FC<{ data: null | BookDataSchema | undefined }> = ({
       toast.success("Book deleted successfully!");
     }
   }, [isSuccess]);
+
+  const id: string | undefined = data?.id;
 
   return (
     <>
@@ -57,7 +56,7 @@ const BooksCard: React.FC<{ data: null | BookDataSchema | undefined }> = ({
         </div>
         <div className="btn__wrapper">
           <button
-            onClick={() => handleDeleteBookById(data?.id)}
+            onClick={() => handleDeleteBookById(id)}
             style={{ background: "#FF4D4F" }}
           >
             <img src={deleteIcon} alt="delete-icon" />

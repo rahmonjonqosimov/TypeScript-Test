@@ -1,7 +1,7 @@
 import React from "react";
 import "./index.scss";
 
-const BooksHero = () => {
+const BooksHero: React.FC = () => {
   return (
     <div className="books-hero">
       <div className="hero__text">
