@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import { logo, user } from "../../assets/images";
 import { BiSearchAlt } from "react-icons/bi";
 import { IoMdNotificationsOutline } from "react-icons/io";
