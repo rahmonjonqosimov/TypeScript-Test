@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import SignUpPage from "./pages/sign-up";
 import BooksPage from "./pages/books";
 import Auth from "./pages/auth";
+import NotFound from "./pages/not-found";
 
 const App: React.FC = () => {
   return (
@@ -17,6 +18,7 @@ const App: React.FC = () => {
         <Route path="/" element={<Auth />}>
           <Route path="/" element={<BooksPage />} />
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <ToastContainer />
     </>
